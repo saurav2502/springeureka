@@ -4,13 +4,51 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eureka.springeureka.order.dao.OrderManageDao">
     <insert id="placeOrder">
-
+        insert into ihub_order_t
+        (
+            order_number,
+            creation_date,
+            customer_id,
+            customer_name,
+            order_amount,
+            delivery_location,
+            delivery_date,
+            last_update_date,
+            last_updated_by,
+            created_by,
+            description
+        ) values
+        (
+            #{orderNumber},
+            #{creationDate},
+            #{customerId},
+            #{customerName},
+            #{orderAmount},
+            #{deliveryLoc},
+            #{deliveryDate},
+            sysdate(),
+            #{customerId},
+            #{customerId},
+            null
+        )
     </insert>
     <update id="cancelOrder">
     </update>
     <update id="updateOrder">
     </update>
     <select id="queryOrder" resultType="com.eureka.springeureka.order.vo.OrderDetailsVo">
+        select
+        tt.order_id as orderId,
+        tt.customer_id as customerId,
+        tt.created_by as createdBy,
+        tt.creation_date creationDate,
+        tt.customer_name as customerName,
+        tt.delivery_date as deliveryDate,
+        tt.delivery_location as deliveryLoc,
+        tt.order_amount as orderAmount,
+        tt.order_number as orderNumber
+        from ihub.ihub_order_t tt
+        where tt.customer_id = #{customerId}
     </select>
 
 </mapper>

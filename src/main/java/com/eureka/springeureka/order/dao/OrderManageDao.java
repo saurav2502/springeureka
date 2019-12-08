@@ -8,7 +8,7 @@ import java.util.Map;
 public interface OrderManageDao {
     int placeOrder(OrderDetailsVo detailsVo);
 
-    OrderDetailsVo queryOrder(@Param("orderId") Long orderId);
+    OrderDetailsVo queryOrder(@Param("customerId") Long customerId);
 
     Map<String, String> cancelOrder(@Param("orderId") Long orderId, @Param("description") String description);
 
