@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class OrderMangeServiceImpl implements OrderMangeService {
     private static final Logger logger = LoggerFactory.getLogger(OrderMangeServiceImpl.class);
@@ -19,11 +22,20 @@ public class OrderMangeServiceImpl implements OrderMangeService {
     public OrderDetailsVo placeOrder(OrderDetailsVo detailsVo) throws Exception {
         OrderDetailsVo ordervo = new OrderDetailsVo();
         int count = orderManageDao.placeOrder(detailsVo);
-        if (count > 0){
-            ordervo = orderManageDao.queryOrder(detailsVo.getCustomerId());
-        }else {
+        if (count > 0) {
+
+            ordervo = orderManageDao.queryOrder1(detailsVo.getCustomerId());
+        } else {
             return new OrderDetailsVo();
         }
         return ordervo;
+    }
+
+    @Override
+    public List<String> queryOrder(Long customerId) {
+        return orderManageDao.queryOrder(customerId)
+                .stream()
+                .map(OrderDetailsVo::getCustomerName)
+                .collect(Collectors.toList());
     }
 }

@@ -5,10 +5,9 @@ import com.eureka.springeureka.order.vo.OrderDetailsVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/order")
@@ -30,5 +29,9 @@ public class OrderManageController {
         }
         logger.info("existing API placeOrder: " + orderDetailsVo.toString());
         return orderDetailsVo;
+    }
+    @GetMapping("/queryOrder/{customerId}")
+    public List<String> queryOrder(@PathVariable("customerId") Long customerId){
+        return orderMangeService.queryOrder(customerId);
     }
 }

@@ -36,7 +36,7 @@
     </update>
     <update id="updateOrder">
     </update>
-    <select id="queryOrder" resultType="com.eureka.springeureka.order.vo.OrderDetailsVo">
+    <select id="queryOrder1" resultType="com.eureka.springeureka.order.vo.OrderDetailsVo">
         select
         tt.order_id as orderId,
         tt.customer_id as customerId,
@@ -49,6 +49,14 @@
         tt.order_number as orderNumber
         from ihub.ihub_order_t tt
         where tt.customer_id = #{customerId}
+    </select>
+    <select id="queryOrder" resultType="com.eureka.springeureka.order.vo.OrderDetailsVo">
+
+        select
+        tt.customer_name as customerName
+        from ihub.ihub_order_t tt
+        where
+        tt.order_amount <![CDATA[>= #{customerId}]]>
     </select>
 
 </mapper>
