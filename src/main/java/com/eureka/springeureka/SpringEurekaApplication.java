@@ -4,14 +4,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
-import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication(scanBasePackages = "com.eureka.springeureka")
-@EnableEurekaServer
-@EnableDiscoveryClient
 @MapperScan(value = "com.eureka.springeureka.**.dao")
-@EnableAsync
+@EnableEurekaClient
+@EnableDiscoveryClient
 public class SpringEurekaApplication {
 
 	public static void main(String[] args) {

@@ -1,0 +1,14 @@
+server:
+  port: 8004
+
+
+spring:
+  application:
+    name: zuul-eureka
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
